@@ -8,17 +8,19 @@ const Tambah = () => {
     name: '',
     price: '',
     stock: '',
-    status: true
+    status: false
   })
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    let status
+    product.status !== false ? status = true : status = false
     const params = new URLSearchParams()
     params.append('name', product.name)
     params.append('price', product.price)
     params.append('stock', product.stock)
-    params.append('status', product.status)
- 
+    params.append('status', status)
+
     try {
       axios.post('https://belajar-api-express-mongodb.herokuapp.com/api/v3/products', params)
       alert("Product Created")
@@ -43,7 +45,7 @@ const Tambah = () => {
           <Input name="name" onChange={handleChange} type="text" placeholder="Nama Produk..." label="Nama"/>
           <Input name="price" onChange={handleChange} type="number" placeholder="Harga Produk..." label="Harga"/>
           <Input name="stock" onChange={handleChange} type="number" placeholder="Stock Produk..." label="Stock"/>
-          <Input name="status"  onChange={(e) => setProduct({status: e.target.checked})} type="checkbox" label="Active"/>
+          <Input name="status"  onChange={handleChange} type="checkbox" label="Active"/>
           <button type="submit" className="btn btn-primary">Simpan</button>
         </form>
       </div>

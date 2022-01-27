@@ -10,7 +10,7 @@ const Edit = () => {
     name: '',
     price: '',
     stock: '',
-    status: true
+    status: false
   })
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Edit = () => {
     newProduct.name === '' ? name = product.name : name = newProduct.name
     newProduct.price === '' ? price = product.price : price = newProduct.price
     newProduct.stock === '' ? stock = product.stock : stock = newProduct.stock
-    newProduct.status === false ? status = product.status : status = newProduct.status
+    newProduct.status !== false ? status = true : status = false
     const data = new URLSearchParams()
     data.append('name', name)
     data.append('price', price)
@@ -56,7 +56,7 @@ const Edit = () => {
           <Input name="name" onChange={handleChange} type="text" placeholder={product.name} label="Nama" />
           <Input name="price" onChange={handleChange} type="number" placeholder={product.price} label="Harga"/>
           <Input name="stock" onChange={handleChange} type="number" placeholder={product.stock} label="Stock"/>
-          <Input name="status" onChange={(e) => setNewProduct({status: e.target.checked})} type="checkbox" label="Active"/>
+          <Input name="status" onChange={handleChange} type="checkbox" label="Active" />
           <button type="submit" className="btn btn-primary">Simpan</button>
         </form>
       </div>
